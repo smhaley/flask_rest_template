@@ -1,0 +1,562 @@
+openapi: 3.0.1
+info:
+  title: Picnic Table API
+  description: API for picnic table app
+  version: 1.0.0
+servers:
+- url: /api
+paths:
+  /location:
+    get:
+      tags:
+      - Location
+      summary: Reads the entire list of all table locations location
+      description: Reads the entire list of all table locations location
+      operationId: location.location.read_all
+      parameters:
+      - name: ne
+        in: query
+        description: northeast corner of bounding box
+        required: false
+        schema:
+          type: string
+      - name: sw
+        in: query
+        description: southwest corner of bounding box
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of location to get from location, Max is 100
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Offset from beginning of list where to start gathering location
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successfully read location list operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    lat:
+                      type: string
+                    lon:
+                      type: string
+                    name:
+                      type: string
+                    timestamp:
+                      type: string
+    post:
+      tags:
+      - Location
+      summary: Create location entry
+      description: Create location enty
+      operationId: location.location.create
+      requestBody:
+        description: Location to create
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lat:
+                  type: number
+                  description: latitude
+                lon:
+                  type: number
+                  description: Longitude
+                name:
+                  type: string
+                  description: location Name
+        required: true
+      responses:
+        201:
+          description: Successfully created Location
+          content: {}
+      x-codegen-request-body-name: location
+  /location/{id}:
+    get:
+      tags:
+      - Location
+      summary: Read one location
+      description: Read one location
+      operationId: location.location.read_one
+      parameters:
+      - name: id
+        in: path
+        description: current location id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successfully read location
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      tags:
+      - Location
+      summary: Update a location name
+      description: Update a location's name
+      operationId: location.location.update
+      parameters:
+      - name: id
+        in: path
+        description: current location id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: New name of location
+        required: false
+      responses:
+        200:
+          description: Successfully updated location
+          content: {}
+      x-codegen-request-body-name: name
+    delete:
+      tags:
+      - Location
+      summary: Delete a location
+      description: Delete a person
+      operationId: location.location.delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successfully deleted id
+          content: {}
+  /users:
+    get:
+      tags:
+      - User
+      summary: Reads the entire list users
+      description: Reads the entire list of users
+      operationId: users.users.read_all
+      parameters:
+      - name: limit
+        in: query
+        description: Number of users to get from users. Max is 100
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Offset from beginning of list where to start gathering users
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successfully read lusers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    timestamp:
+                      type: string
+    post:
+      tags:
+      - User
+      summary: Create user entry
+      description: Create user enty
+      operationId: users.users.create
+      requestBody:
+        description: User to create
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: user name
+                email:
+                  type: string
+                  description: user email
+        required: true
+      responses:
+        201:
+          description: Successfully created user
+          content: {}
+      x-codegen-request-body-name: user
+  /users/{id}:
+    get:
+      tags:
+      - User
+      summary: Read one user
+      description: Read one user
+      operationId: users.users.read_one
+      parameters:
+      - name: id
+        in: path
+        description: current user id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successfully read location
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      tags:
+      - User
+      summary: Update a user
+      description: Update a users name and email
+      operationId: users.users.update
+      parameters:
+      - name: id
+        in: path
+        description: current user id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: New name of user
+                email:
+                  type: string
+                  description: New email of user
+        required: false
+      responses:
+        200:
+          description: Successfully updated user
+          content: {}
+      x-codegen-request-body-name: user
+    delete:
+      tags:
+      - User
+      summary: Delete a user
+      description: Delete a user
+      operationId: users.users.delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successfully deleted id
+          content: {}
+  /favorites/user/{user_id}:
+    get:
+      tags:
+      - Favorites
+      summary: Reads the entire list of favorites for a user
+      description: Reads the entire list of favorites for a user
+      operationId: favorites.favorites.read_all
+      parameters:
+      - name: user_id
+        in: path
+        description: user id
+        required: true
+        schema:
+          type: number
+      - name: limit
+        in: query
+        description: Number of favorites to get from favorites, Max is 100
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Offset from beginning of list where to start gathering users
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successfully read favorites
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    user_id:
+                      type: number
+                    loc_id:
+                      type: number
+                    timestamp:
+                      type: string
+    post:
+      tags:
+      - Favorites
+      summary: Creates new favorite for a user
+      description: Create favorite enty
+      operationId: favorites.favorites.create
+      parameters:
+      - name: user_id
+        in: path
+        description: user id
+        required: true
+        schema:
+          type: number
+      requestBody:
+        description: favorite to create
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                loc_id:
+                  type: number
+                  description: location id
+        required: true
+      responses:
+        201:
+          description: Successfully created favorite
+          content: {}
+      x-codegen-request-body-name: favorite
+  /favorites/user/{user_id}location/{loc_id}:
+    delete:
+      tags:
+      - Favorites
+      summary: Delete a favorite
+      description: Delete a favorite
+      operationId: favorites.favorites.delete
+      parameters:
+      - name: user_id
+        in: path
+        description: user id
+        required: true
+        schema:
+          type: number
+      - name: loc_id
+        in: path
+        description: location id
+        required: true
+        schema:
+          type: number
+      responses:
+        200:
+          description: Successfully deleted id
+          content: {}
+  /reviews:
+    get:
+      tags:
+      - Reviews
+      summary: Reads the entire list reviews
+      description: Reads the entire list of reviews. Get reviews by either bbox, user
+        or location
+      operationId: reviews.reviews.read_all
+      parameters:
+      - name: sw
+        in: query
+        description: south east coordinates
+        schema:
+          type: string
+      - name: ne
+        in: query
+        description: north east coordinates
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: user id
+        schema:
+          type: integer
+      - name: loc_id
+        in: query
+        description: location id
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: Number of reviews to get from reviews. Max is 100.
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: Offset from beginning of list where to start gathering users
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successfully read reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    comment:
+                      type: string
+                    review:
+                      type: string
+                    loc_id:
+                      type: integer
+                    user_id:
+                      type: integer
+                    timestamp:
+                      type: string
+  /reviews/user/{user_id}/location/{loc_id}:
+    get:
+      tags:
+      - Reviews
+      summary: Read one review
+      description: Read one review
+      operationId: reviews.reviews.read_one
+      parameters:
+      - name: user_id
+        in: path
+        description: user id
+        required: true
+        schema:
+          type: number
+      - name: loc_id
+        in: path
+        description: location id
+        required: true
+        schema:
+          type: number
+      responses:
+        200:
+          description: Successfully read location
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      tags:
+      - Reviews
+      summary: Update a review
+      description: Update a review
+      operationId: reviews.reviews.update
+      parameters:
+      - name: user_id
+        in: path
+        description: user id
+        required: true
+        schema:
+          type: number
+      - name: loc_id
+        in: path
+        description: location id
+        required: true
+        schema:
+          type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                  description: New comment
+                review:
+                  type: integer
+                  description: New review
+        required: false
+      responses:
+        200:
+          description: Successfully updated review
+          content: {}
+      x-codegen-request-body-name: review
+    post:
+      tags:
+      - Reviews
+      summary: Create review
+      description: Create user enty
+      operationId: reviews.reviews.create
+      parameters:
+      - name: user_id
+        in: path
+        description: user id
+        required: true
+        schema:
+          type: number
+      - name: loc_id
+        in: path
+        description: location id
+        required: true
+        schema:
+          type: number
+      requestBody:
+        description: review to create
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+                  description: comments on location
+                review:
+                  type: integer
+                  description: numeric review 1-5 on location
+        required: true
+      responses:
+        201:
+          description: Successfully created review
+          content: {}
+      x-codegen-request-body-name: review
+    delete:
+      tags:
+      - Reviews
+      summary: Delete a review
+      description: Delete a review
+      operationId: reviews.reviews.delete
+      parameters:
+      - name: user_id
+        in: path
+        description: user id
+        required: true
+        schema:
+          type: number
+      - name: loc_id
+        in: path
+        description: location id
+        required: true
+        schema:
+          type: number
+      responses:
+        200:
+          description: Successfully deleted id
+          content: {}
+components: {}
