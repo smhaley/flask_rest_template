@@ -1,6 +1,6 @@
 from .conftest import test_client, init_database
 from models import Users
-from users.users_schema import UsersSchema
+from controllers.users.users_schema import UsersSchema
 from uuid import uuid4
 from app import db
 
