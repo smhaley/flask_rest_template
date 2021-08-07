@@ -12,7 +12,7 @@ paths:
       - Location
       summary: Reads the entire list of all table locations location
       description: Reads the entire list of all table locations location
-      operationId: location.location.read_all
+      operationId: controllers.location.location.read_all
       parameters:
       - name: ne
         in: query
@@ -61,7 +61,7 @@ paths:
       - Location
       summary: Create location entry
       description: Create location enty
-      operationId: location.location.create
+      operationId: controllers.location.location.create
       requestBody:
         description: Location to create
         content:
@@ -90,7 +90,7 @@ paths:
       - Location
       summary: Read one location
       description: Read one location
-      operationId: location.location.read_one
+      operationId: controllers.location.location.read_one
       parameters:
       - name: id
         in: path
@@ -110,7 +110,7 @@ paths:
       - Location
       summary: Update a location name
       description: Update a location's name
-      operationId: location.location.update
+      operationId: controllers.location.location.update
       parameters:
       - name: id
         in: path
@@ -138,7 +138,7 @@ paths:
       - Location
       summary: Delete a location
       description: Delete a person
-      operationId: location.location.delete
+      operationId: controllers.location.location.delete
       parameters:
       - name: id
         in: path
@@ -155,7 +155,7 @@ paths:
       - User
       summary: Reads the entire list users
       description: Reads the entire list of users
-      operationId: users.users.read_all
+      operationId: controllers.users.users.read_all
       parameters:
       - name: limit
         in: query
@@ -190,7 +190,7 @@ paths:
       - User
       summary: Create user entry
       description: Create user enty
-      operationId: users.users.create
+      operationId: controllers.users.users.create
       requestBody:
         description: User to create
         content:
@@ -216,7 +216,7 @@ paths:
       - User
       summary: Read one user
       description: Read one user
-      operationId: users.users.read_one
+      operationId: controllers.users.users.read_one
       parameters:
       - name: id
         in: path
@@ -236,7 +236,7 @@ paths:
       - User
       summary: Update a user
       description: Update a users name and email
-      operationId: users.users.update
+      operationId: controllers.users.users.update
       parameters:
       - name: id
         in: path
@@ -267,7 +267,7 @@ paths:
       - User
       summary: Delete a user
       description: Delete a user
-      operationId: users.users.delete
+      operationId: controllers.users.users.delete
       parameters:
       - name: id
         in: path
@@ -284,7 +284,7 @@ paths:
       - Favorites
       summary: Reads the entire list of favorites for a user
       description: Reads the entire list of favorites for a user
-      operationId: favorites.favorites.read_all
+      operationId: controllers.favorites.favorites.read_all
       parameters:
       - name: user_id
         in: path
@@ -325,7 +325,7 @@ paths:
       - Favorites
       summary: Creates new favorite for a user
       description: Create favorite enty
-      operationId: favorites.favorites.create
+      operationId: controllers.favorites.favorites.create
       parameters:
       - name: user_id
         in: path
@@ -355,7 +355,7 @@ paths:
       - Favorites
       summary: Delete a favorite
       description: Delete a favorite
-      operationId: favorites.favorites.delete
+      operationId: controllers.favorites.favorites.delete
       parameters:
       - name: user_id
         in: path
@@ -380,7 +380,7 @@ paths:
       summary: Reads the entire list reviews
       description: Reads the entire list of reviews. Get reviews by either bbox, user
         or location
-      operationId: reviews.reviews.read_all
+      operationId: controllers.reviews.reviews.read_all
       parameters:
       - name: sw
         in: query
@@ -440,7 +440,7 @@ paths:
       - Reviews
       summary: Read one review
       description: Read one review
-      operationId: reviews.reviews.read_one
+      operationId: controllers.reviews.reviews.read_one
       parameters:
       - name: user_id
         in: path
@@ -466,7 +466,7 @@ paths:
       - Reviews
       summary: Update a review
       description: Update a review
-      operationId: reviews.reviews.update
+      operationId: controllers.reviews.reviews.update
       parameters:
       - name: user_id
         in: path
@@ -503,7 +503,7 @@ paths:
       - Reviews
       summary: Create review
       description: Create user enty
-      operationId: reviews.reviews.create
+      operationId: controllers.reviews.reviews.create
       parameters:
       - name: user_id
         in: path
@@ -541,7 +541,7 @@ paths:
       - Reviews
       summary: Delete a review
       description: Delete a review
-      operationId: reviews.reviews.delete
+      operationId: controllers.reviews.reviews.delete
       parameters:
       - name: user_id
         in: path
