@@ -30,3 +30,4 @@
 - confirm `.env` is correct
 - `Flask run`
 - Visit the api gui at: `http://localhost:5000/api/ui/`
+- remove `migrations/` from `.gitignore
